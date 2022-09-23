@@ -1011,5 +1011,12 @@
   "toast": {
     "urlCopy": "URL copied to clipboard",
     "paymentLinkCopy": "Payment link copied to clipboard"
+  },
+  "unstableDiffusion": {
+    "promptInput": {
+      "label": "Enter prompt",
+      "placeholder": "watercolor painting of girl standing in the green field, digital art",
+      "copy": "Kodadot link successfuly copied"
+    }
   }
 }
