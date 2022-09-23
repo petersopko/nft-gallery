@@ -12,22 +12,20 @@
       icon-left="paper-plane"
       class="fill-button"
       outlined
-      @click="diffuse">
+      @click="diffuse(prompt)">
       Diffuse
     </b-button>
-    <LabeledText label="mint.nft.name.label" class="mb-2">
-      {{ prompt }}
-    </LabeledText>
-
-    <LabeledText label="mint.nft.description.label">
-      {{ 'TEST123' }}
-    </LabeledText>
+    <p class="subtitle is-size-6">
+      <slot v-if="!isReplicateLoading">~</slot>
+      <b-skeleton :active="isReplicateLoading"></b-skeleton>
+    </p>
+    <img v-for="image in result" :key="image" :src="image" :alt="prompt" />
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { createPrediction } from '@/utils/unstableDiffusion'
+import { ReplicateResponse, promptReplicate } from '@/utils/unstableDiffusion'
 
 @Component({
   components: {
@@ -37,16 +35,20 @@ import { createPrediction } from '@/utils/unstableDiffusion'
   },
 })
 export default class UnstableDiffusion extends Vue {
+  private isReplicateLoading = false
+  protected result: ReplicateResponse | null = null
   protected prompt = ''
   // const prediction = await createPrediction(prompt)
   protected async diffuse(prompt: string) {
     try {
-      const response = await createPrediction(prompt)
-      // this.isGptLoading = true
+      this.isReplicateLoading = true
+      const response = await promptReplicate(prompt)
+      console.log(response)
+      this.result = response
       // this.fileHash = await pinFileToIPFS(file, token)
       // this.$set(this.rmrkMint, 'name', title)
       // this.$set(this.rmrkMint, 'description', description)
-      // this.isGptLoading = false
+      this.isReplicateLoading = false
     } catch (e) {
       console.log(e)
       // this.$consola.error(e)
@@ -59,7 +61,7 @@ export default class UnstableDiffusion extends Vue {
     }
   }
   layout() {
-    return 'centered-half-layout'
+    return 'full-width-layout'
   }
 }
 </script>
