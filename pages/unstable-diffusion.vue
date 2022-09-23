@@ -38,6 +38,7 @@ export default class UnstableDiffusion extends Vue {
   private isReplicateLoading = false
   protected result: ReplicateResponse | null = null
   protected prompt = ''
+
   // const prediction = await createPrediction(prompt)
   protected async diffuse(prompt: string) {
     try {
@@ -60,8 +61,9 @@ export default class UnstableDiffusion extends Vue {
       //   this.$t('mint.nft.rmrkDescription')
     }
   }
+
   layout() {
-    return 'full-width-layout'
+    return 'centered-half-layout'
   }
 }
 </script>
