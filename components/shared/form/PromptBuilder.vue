@@ -1,6 +1,6 @@
 <template>
   <b-field :label="$t(label)" horizontal>
-    <b-input maxlength="200" type="textarea"></b-input>
+    <b-input v-model="vValue" maxlength="200" type="textarea"></b-input>
   </b-field>
   <!--  <b-field :label="$t(label)" horizontal>-->
   <!--    <b-input-->
@@ -37,9 +37,6 @@ export default class BasicInput extends Vue {
   @Prop({ type: Boolean, default: false }) required!: boolean
   @Ref('input') readonly input
   protected hasFocus = false
-  public checkValidity() {
-    return this.input.checkHtml5Validity()
-  }
 }
 </script>
 
