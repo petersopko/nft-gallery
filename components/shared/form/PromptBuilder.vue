@@ -1,6 +1,11 @@
 <template>
   <b-field :label="$t(label)" horizontal>
-    <b-input v-model="vValue" maxlength="200" type="textarea"></b-input>
+    <b-input
+      v-model="vValue"
+      maxlength="200"
+      type="textarea"
+      :placeholder="placeholder">
+    </b-input>
   </b-field>
   <!--  <b-field :label="$t(label)" horizontal>-->
   <!--    <b-input-->
