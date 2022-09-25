@@ -5,6 +5,7 @@
       <h1 class="title is-2 has-text-centered">
         {{ 'Unstable Diffusion' }}
       </h1>
+      <SelectModelDropdown />
       <PromptBuilder
         v-model="prompt"
         :placeholder="$t('unstableDiffusion.promptInput.placeholder')" />
@@ -36,10 +37,13 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { ReplicateResponse, promptReplicate } from '@/utils/unstableDiffusion'
+import SelectModelDropdown from '~/components/generative/SelectModelDropdown.vue'
 
 @Component({
   components: {
-    PromptBuilder: () => import('@/components/shared/form/PromptBuilder.vue'),
+    SelectModelDropdown: () =>
+      import('~/components/generative/SelectModelDropdown.vue'),
+    PromptBuilder: () => import('~/components/generative/PromptBuilder.vue'),
     DisabledInput: () => import('@/components/shared/DisabledInput.vue'),
     LabeledText: () => import('@/components/shared/gallery/LabeledText.vue'),
     Loader: () => import('@/components/shared/Loader.vue'),
