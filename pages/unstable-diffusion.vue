@@ -37,7 +37,6 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { ReplicateResponse, promptReplicate } from '@/utils/unstableDiffusion'
-import SelectModelDropdown from '~/components/generative/SelectModelDropdown.vue'
 
 @Component({
   components: {
