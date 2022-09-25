@@ -1,25 +1,34 @@
 <template>
   <section>
-    <p class="title is-size-3">
-      {{ 'Unstable Diffusion' }}
-    </p>
-    <PromptBuilder
-      v-model="prompt"
-      :label="$t('unstableDiffusion.promptInput.label')"
-      :placeholder="$t('unstableDiffusion.promptInput.placeholder')" />
-    <b-button
-      type="is-primary"
-      icon-left="paper-plane"
-      class="fill-button"
-      outlined
-      @click="diffuse(prompt)">
-      Diffuse
-    </b-button>
-    <p class="subtitle is-size-6">
-      <slot v-if="!isReplicateLoading">~</slot>
-      <b-skeleton :active="isReplicateLoading"></b-skeleton>
-    </p>
-    <img v-for="image in result" :key="image" :src="image" :alt="prompt" />
+    <div class="column is-8 is-offset-2">
+      <h1 class="title is-2 has-text-centered">
+        {{ 'Unstable Diffusion' }}
+      </h1>
+      <PromptBuilder
+        v-model="prompt"
+        class="is-centered"
+        :placeholder="$t('unstableDiffusion.promptInput.placeholder')" />
+      <b-button
+        type="is-primary"
+        icon-left="paper-plane"
+        class="fill-button"
+        outlined
+        @click="diffuse(prompt)">
+        Diffuse
+      </b-button>
+      <p class="subtitle is-size-6">
+        <slot v-if="!isReplicateLoading"></slot>
+        <b-skeleton :active="isReplicateLoading"></b-skeleton>
+      </p>
+    </div>
+    <div class="columns is-multiline">
+      <img
+        v-for="image in result"
+        :key="image"
+        :src="image"
+        :alt="prompt"
+        :class="`column is-4 column-padding`" />
+    </div>
   </section>
 </template>
 
@@ -62,9 +71,9 @@ export default class UnstableDiffusion extends Vue {
     }
   }
 
-  layout() {
-    return 'centered-half-layout'
-  }
+  // layout() {
+  //   return 'centered-half-layout'
+  // }
 }
 </script>
 

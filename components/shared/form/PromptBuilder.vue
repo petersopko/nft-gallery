@@ -1,5 +1,5 @@
 <template>
-  <b-field :label="$t(label)" horizontal>
+  <b-field horizontal>
     <b-input
       v-model="vValue"
       maxlength="200"
@@ -33,7 +33,6 @@ import { Component, Prop, Ref, VModel, Vue } from 'nuxt-property-decorator'
 export default class BasicInput extends Vue {
   // Dev: make vValue required
   @VModel({ type: String }) vValue!: string
-  @Prop({ type: String, required: true }) label!: string
   @Prop({ type: String, required: true }) placeholder!: string
   @Prop({ type: Boolean, default: false }) expanded!: boolean
   @Prop({ type: String }) message!: string
