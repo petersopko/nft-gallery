@@ -1,5 +1,6 @@
 <template>
   <section>
+    <Loader :value="isReplicateLoading" />
     <div class="column is-8 is-offset-2">
       <h1 class="title is-2 has-text-centered">
         {{ 'Unstable Diffusion' }}
@@ -11,14 +12,15 @@
         type="is-primary"
         icon-left="paper-plane"
         class="fill-button"
+        expanded
         outlined
         @click="diffuse(prompt)">
         Diffuse
       </b-button>
-      <p class="subtitle is-size-6">
-        <slot v-if="!isReplicateLoading"></slot>
-        <b-skeleton :active="isReplicateLoading"></b-skeleton>
-      </p>
+      <!--      <p class="subtitle is-size-6">-->
+      <!--        <slot v-if="!isReplicateLoading"></slot>-->
+      <!--        <b-skeleton :active="isReplicateLoading"></b-skeleton>-->
+      <!--      </p>-->
     </div>
     <div class="columns is-multiline">
       <img
@@ -40,6 +42,7 @@ import { ReplicateResponse, promptReplicate } from '@/utils/unstableDiffusion'
     PromptBuilder: () => import('@/components/shared/form/PromptBuilder.vue'),
     DisabledInput: () => import('@/components/shared/DisabledInput.vue'),
     LabeledText: () => import('@/components/shared/gallery/LabeledText.vue'),
+    Loader: () => import('@/components/shared/Loader.vue'),
   },
 })
 export default class UnstableDiffusion extends Vue {
