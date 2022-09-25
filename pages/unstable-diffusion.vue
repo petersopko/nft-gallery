@@ -60,8 +60,8 @@ export default class UnstableDiffusion extends Vue {
       this.isReplicateLoading = false
     } catch (e) {
       console.log(e)
-      // this.$consola.error(e)
-      // this.isGptLoading = false
+      this.$consola.error(e)
+      this.isReplicateLoading = false
       // this.$set(this.rmrkMint, 'name', 'Something went wrong.')
       // this.$set(
       //   this.rmrkMint,
