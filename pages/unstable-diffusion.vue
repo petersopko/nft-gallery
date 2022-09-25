@@ -6,7 +6,6 @@
       </h1>
       <PromptBuilder
         v-model="prompt"
-        class="is-centered"
         :placeholder="$t('unstableDiffusion.promptInput.placeholder')" />
       <b-button
         type="is-primary"
@@ -27,7 +26,7 @@
         :key="image"
         :src="image"
         :alt="prompt"
-        :class="`column is-4 column-padding`" />
+        :class="`column is-3 column-padding`" />
     </div>
   </section>
 </template>

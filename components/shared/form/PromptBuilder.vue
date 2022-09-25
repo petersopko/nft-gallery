@@ -1,29 +1,10 @@
 <template>
-  <b-field horizontal>
-    <b-input
-      v-model="vValue"
-      maxlength="200"
-      type="textarea"
-      :placeholder="placeholder">
-    </b-input>
-  </b-field>
-  <!--  <b-field :label="$t(label)" horizontal>-->
-  <!--    <b-input-->
-  <!--      ref="input"-->
-  <!--      v-model="vValue"-->
-  <!--      :placeholder="placeholder"-->
-  <!--      :expanded="expanded"-->
-  <!--      :maxlength="maxlength"-->
-  <!--      :required="required"-->
-  <!--      :type="type"-->
-  <!--      @blur="hasFocus = false"-->
-  <!--      @focus="hasFocus = true" />-->
-  <!--    <template v-if="hasFocus && message" #message>-->
-  <!--      <transition name="fade">-->
-  <!--        <span class="has-text-primary is-italic">{{ message }}</span>-->
-  <!--      </transition>-->
-  <!--    </template>-->
-  <!--  </b-field>-->
+  <b-input
+    v-model="vValue"
+    maxlength="200"
+    type="textarea"
+    :placeholder="placeholder">
+  </b-input>
 </template>
 
 <script lang="ts">
