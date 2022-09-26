@@ -550,6 +550,10 @@
       "PRICE_DESC": "Price: High to Low",
       "PRICE_ASC": "Price: Low to High",
       "SN_ASC": "Serial Number Ascending"
+    },
+    "model":  {
+     "stable-diffusion": "Stable Diffusion",
+      "text-to-pokemon": "Text to Pokemon"
     }
   },
   "query": {

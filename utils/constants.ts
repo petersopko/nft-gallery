@@ -53,4 +53,9 @@ export const NFT_SQUID_SORT_CONDITION_LIST: string[] = [
   'sn_ASC',
 ]
 
+export const availableReplicateModels: string[] = [
+  'stable-diffusion',
+  'text-to-pokemon',
+]
+
 export const chainTestList = ['westend', 'westmint']

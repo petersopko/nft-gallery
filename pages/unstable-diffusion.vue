@@ -5,7 +5,7 @@
       <h1 class="title is-2 has-text-centered">
         {{ 'Unstable Diffusion' }}
       </h1>
-      <SelectModelDropdown />
+      <SelectModelDropdown :value="selectedModel" />
       <PromptBuilder
         v-model="prompt"
         :placeholder="$t('unstableDiffusion.promptInput.placeholder')" />
@@ -13,6 +13,7 @@
         type="is-primary"
         icon-left="paper-plane"
         class="fill-button"
+        :disabled="selectedModel === '' || prompt === ''"
         expanded
         outlined
         @click="diffuse(prompt)">
@@ -35,7 +36,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { ReplicateResponse, promptReplicate } from '@/utils/unstableDiffusion'
 
 @Component({
@@ -49,6 +50,7 @@ import { ReplicateResponse, promptReplicate } from '@/utils/unstableDiffusion'
   },
 })
 export default class UnstableDiffusion extends Vue {
+  @Prop({ type: String }) public selectedModel!: string
   private isReplicateLoading = false
   protected result: ReplicateResponse | null = null
   protected prompt = ''
