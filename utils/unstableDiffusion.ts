@@ -8,7 +8,7 @@ const api = Axios.create({
 })
 
 export type ReplicateResponse = {
-  fourImagesGenerated: string[]
+  generatedImages: string[]
 }
 
 export const promptReplicate = async (prompt: string) => {
