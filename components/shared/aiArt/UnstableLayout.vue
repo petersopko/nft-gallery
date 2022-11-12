@@ -7,7 +7,7 @@
     <b-tabs v-model="selectedTab" data-cy="tabs">
       <b-tab-item label="LexicaGallery" value="LexicaGallery">
         <template v-if="selectedTab === 'LexicaGallery'">
-          <LexicaGallery />
+          <LexicaGallery :v-bind="selectedTab" />
         </template>
       </b-tab-item>
       <b-tab-item label="Replicate Generated" value="Replicate Generated">

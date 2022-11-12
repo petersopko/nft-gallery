@@ -13,10 +13,7 @@ export type GptResponse = {
 }
 
 export const askGpt = async (url: string) => {
-  const { status, data } = await api.post<GptResponse>(
-    'titleDescriptionGenerator',
-    { url }
-  )
+  const { status, data } = await api.post<GptResponse>({ url })
   console.log('[GPT::askGpt]', status)
   return data
 }
