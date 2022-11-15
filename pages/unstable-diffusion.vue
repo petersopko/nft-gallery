@@ -1,13 +1,13 @@
 <template>
-  <LexicaGallery />
+  <ReplicateModels />
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import LexicaGallery from '~/components/generative/ReplicateModels.vue'
+import ReplicateModels from '~/components/generative/ReplicateModels.vue'
 
 @Component<UnstableDiffusion>({
-  components: { LexicaGallery },
+  components: { ReplicateModels },
 })
 export default class UnstableDiffusion extends Vue {}
 </script>

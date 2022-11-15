@@ -5,7 +5,7 @@
         {{ 'Unstable Diffusion' }}
       </h1>
     </div>
-    <Loader :value="isLoading" />
+    <Loader :value="isReplicateLoading" />
     <section>
       <SelectModelDropdown :value="selectedModel" />
       <PromptBuilder
@@ -21,17 +21,31 @@
         @click="diffuse(prompt)">
         Diffuse
       </b-button>
+      <!--show images coming from the model-->
+      <div class="columns is-multiline">
+        <div
+          v-for="(generatedImage, index) in replicateResponse"
+          :key="`prompt${index}`"
+          class="column is-4 column-padding">
+          <a :href="generatedImage" target="_blank" class="nft-card__skeleton">
+            <div class="card-image">
+              <BasicImage
+                v-show="generatedImage"
+                :src="generatedImage"
+                :alt="prompt"
+                custom-class="gallery__image-wrapper" />
+            </div>
+          </a>
+        </div>
+      </div>
     </section>
-    <div></div>
   </div>
 </template>
 
 <script lang="ts">
-import 'lazysizes'
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 
 import AuthMixin from '~/utils/mixins/authMixin'
-import InfiniteScrollMixin from '~/utils/mixins/infiniteScrollMixin'
 import PrefixMixin from '~/utils/mixins/prefixMixin'
 import { ReplicateResponse, promptReplicate } from '~/utils/unstableDiffusion'
 
@@ -48,13 +62,8 @@ const components = {
 
 @Component<ReplicateModels>({
   components,
-  name: 'Gallery',
 })
-export default class LexicaGallery extends mixins(
-  PrefixMixin,
-  InfiniteScrollMixin,
-  AuthMixin
-) {
+export default class ReplicateModels extends mixins(PrefixMixin, AuthMixin) {
   protected isLoading = false
   @Prop({ type: String }) public selectedModel!: string
   private isReplicateLoading = false
