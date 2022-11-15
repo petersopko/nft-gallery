@@ -6,10 +6,10 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import ReplicateModels from '~/components/generative/ReplicateModels.vue'
 
-@Component<UnstableDiffusion>({
+@Component<GenerateArt>({
   components: { ReplicateModels },
 })
-export default class UnstableDiffusion extends Vue {}
+export default class GenerateArt extends Vue {}
 </script>
 
 <style scoped></style>

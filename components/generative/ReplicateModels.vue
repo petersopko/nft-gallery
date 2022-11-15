@@ -47,7 +47,7 @@ import { Component, Prop, mixins } from 'nuxt-property-decorator'
 
 import AuthMixin from '~/utils/mixins/authMixin'
 import PrefixMixin from '~/utils/mixins/prefixMixin'
-import { ReplicateResponse, promptReplicate } from '~/utils/unstableDiffusion'
+import { ReplicateResponse, promptReplicate } from '~/utils/replicateModels'
 
 const components = {
   Loader: () => import('~/components/shared/Loader.vue'),
