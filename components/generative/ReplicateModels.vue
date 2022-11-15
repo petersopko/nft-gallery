@@ -1,61 +1,52 @@
 <template>
   <div class="gallery container">
-    <Loader :value="isLoading" />
-    <PromptControls />
-    <div>
-      <InfiniteLoading
-        v-if="startPage > 1 && !isLoading && total > 0"
-        direction="top"
-        @infinite="reachTopHandler"></InfiniteLoading>
-      <div :id="scrollContainerId" class="columns is-multiline">
-        <div
-          v-for="image in lexicaResult"
-          :key="image.id"
-          :class="`column is-4 column-padding ${scrollItemClassName}`">
-          <div class="card nft-card">
-            <div class="card-image">
-              <BasicImage
-                :src="image.src"
-                :alt="image.prompt"
-                custom-class="gallery__image-wrapper" />
-            </div>
-            <div class="card-content">
-              <div class="has-text-overflow-ellipsis">
-                {{ image.title }}
-              </div>
-            </div>
-          </div>
-          <InfiniteLoading
-            v-if="canLoadNextPage && !isLoading && total > 0"
-            @infinite="reachBottomHandler"></InfiniteLoading>
-          <ScrollTopButton />
-        </div>
-      </div>
+    <div class="column is-8 is-offset-2">
+      <h1 class="title is-2 has-text-centered">
+        {{ 'Unstable Diffusion' }}
+      </h1>
     </div>
+    <Loader :value="isLoading" />
+    <section>
+      <SelectModelDropdown :value="selectedModel" />
+      <PromptBuilder
+        v-model="prompt"
+        :placeholder="$t('unstableDiffusion.promptInput.placeholder')" />
+      <b-button
+        type="is-primary"
+        icon-left="paper-plane"
+        class="fill-button"
+        :disabled="selectedModel === '' || prompt === ''"
+        expanded
+        outlined
+        @click="diffuse(prompt)">
+        Diffuse
+      </b-button>
+    </section>
+    <div></div>
   </div>
 </template>
 
 <script lang="ts">
 import 'lazysizes'
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, Prop, mixins } from 'nuxt-property-decorator'
 
-import AuthMixin from '@/utils/mixins/authMixin'
-import InfiniteScrollMixin from '@/utils/mixins/infiniteScrollMixin'
-import PrefixMixin from '@/utils/mixins/prefixMixin'
-
-// import passionQuery from '@/queries/rmrk/subsquid/passionFeed.graphql'
+import AuthMixin from '~/utils/mixins/authMixin'
+import InfiniteScrollMixin from '~/utils/mixins/infiniteScrollMixin'
+import PrefixMixin from '~/utils/mixins/prefixMixin'
+import { ReplicateResponse, promptReplicate } from '~/utils/unstableDiffusion'
 
 const components = {
-  // GalleryCardList: () => import('./GalleryCardList.vue'),
-  // Pagination: () => import('./Pagination.vue'),
-  Loader: () => import('@/components/shared/Loader.vue'),
-  BasicImage: () => import('@/components/shared/view/BasicImage.vue'),
+  Loader: () => import('~/components/shared/Loader.vue'),
+  BasicImage: () => import('~/components/shared/view/BasicImage.vue'),
   InfiniteLoading: () => import('vue-infinite-loading'),
-  ScrollTopButton: () => import('@/components/shared/ScrollTopButton.vue'),
-  PromptControls: () => import('@/components/shared/aiArt/PromptControls.vue'),
+  ScrollTopButton: () => import('~/components/shared/ScrollTopButton.vue'),
+  SelectModelDropdown: () =>
+    import('~/components/generative/SelectModelDropdown.vue'),
+  PromptBuilder: () => import('~/components/generative/PromptBuilder.vue'),
+  LabeledText: () => import('~/components/shared/gallery/LabeledText.vue'),
 }
 
-@Component<LexicaGallery>({
+@Component<ReplicateModels>({
   components,
   name: 'Gallery',
 })
@@ -65,8 +56,24 @@ export default class LexicaGallery extends mixins(
   AuthMixin
 ) {
   protected isLoading = false
-  private hasPassionFeed = false
-  private passionList: string[] = []
+  @Prop({ type: String }) public selectedModel!: string
+  private isReplicateLoading = false
+  public replicateResponse: ReplicateResponse | null = null
+  protected prompt = ''
+
+  protected async diffuse(prompt: string) {
+    try {
+      this.isReplicateLoading = true
+      const response = await promptReplicate(prompt)
+      console.log(response)
+      this.replicateResponse = response
+      this.isReplicateLoading = false
+    } catch (e) {
+      console.log(e)
+      this.$consola.error(e)
+      this.isReplicateLoading = false
+    }
+  }
 }
 </script>
 

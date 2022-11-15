@@ -74,6 +74,7 @@ import {
   NFTMetadata,
 } from '@/components/rmrk/service/scheme'
 import { getSanitizer } from '@/components/rmrk/utils'
+import { SearchQuery } from '@/components/rmrk/Gallery/search/types'
 import 'lazysizes'
 
 import collectionListWithSearch from '@/queries/subsquid/general/collectionListWithSearch.graphql'

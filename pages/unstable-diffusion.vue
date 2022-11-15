@@ -1,24 +1,13 @@
 <template>
-  <section>
-    <div class="column is-8 is-offset-2">
-      <h1 class="title is-2 has-text-centered">
-        {{ 'Unstable Diffusion' }}
-      </h1>
-    </div>
-    <UnstableLayout />
-  </section>
+  <LexicaGallery />
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import UnstableLayout from '~/components/shared/aiArt/UnstableLayout.vue'
-
-const components = {
-  UnstableLayout,
-}
+import LexicaGallery from '~/components/generative/ReplicateModels.vue'
 
 @Component<UnstableDiffusion>({
-  components,
+  components: { LexicaGallery },
 })
 export default class UnstableDiffusion extends Vue {}
 </script>
