@@ -2,7 +2,7 @@
   <div class="gallery container">
     <div class="column is-8 is-offset-2">
       <h1 class="title is-2 has-text-centered">
-        {{ 'Unstable Diffusion' }}
+        {{ 'Generate Art' }}
       </h1>
     </div>
     <Loader :value="isReplicateLoading" />
